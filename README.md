@@ -4,7 +4,7 @@
 ## Programms 
 ### pacman 
 ```
-sudo pamcan -Sy hyprland waybar ripgrep tmux
+sudo pamcan -Sy hyprland waybar ripgrep tmux brightnessctl
 ```
 ### yay
 ```
