@@ -1,10 +1,11 @@
 # dotfiles
 ## Arch install
+this section still needs to be done lol ;)
 
 ## Programms 
 ### pacman 
 ```
-sudo pamcan -Sy hyprland waybar ripgrep tmux brightnessctl
+sudo pacman -Sy hyprland waybar ripgrep tmux brightnessctl ttf-jetbrains-mono ttf-liberation ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols-common emacs
 ```
 ### yay
 ```
