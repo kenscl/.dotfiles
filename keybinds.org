@@ -11,3 +11,14 @@ A lot of stuff is sort of like in vim (because of evil mode) but a lot of stuff 
 - project find file: "C-c p f"
 - grep over project "C-c p s g"
 
+* Auto complete
+** IDO/SMEX
+- autocomplete "Enter"
+- cycle "C-s/C-r"
+
+** Company
+- autocomplete "Enter"
+- cycle "C-p/C-n"
+
+* Magit
+

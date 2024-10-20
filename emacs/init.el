@@ -18,7 +18,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(yasnippet lsp-mode projectile corfu evil)))
+ '(package-selected-packages '(magit yasnippet lsp-mode projectile corfu evil)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -36,7 +36,7 @@
 (load-theme 'catppuccin :no-confirm)
 (setq catpuccin-flavor 'mocha)
 
-(set-face-attribute 'default nil :font "Iosevka-11")
+(set-face-attribute 'default nil :font "Iosevka-11.5")
 
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
@@ -46,58 +46,66 @@
 (setq display-line-numbers-type 'relative)
 
 ;; lsp stuff
-(use-package corfu
-  :ensure t
-  ;; Optional customizations
-  :custom
-  (corfu-cycle t)                 ; Allows cycling through candidates
-  (corfu-auto t)                  ; Enable auto completion
-  (corfu-auto-prefix 2)
-  (corfu-auto-delay 0.1)
-  (corfu-popupinfo-delay '(0.5 . 0.2))
-  (corfu-preview-current 'insert) ; insert previewed candidate
-  (corfu-preselect 'prompt)
-  (corfu-on-exact-match nil)      ; Don't auto expand tempel snippets
-  ;; Optionally use TAB for cycling, default is `corfu-complete'.
-  :bind (:map corfu-map
-              ("M-SPC"      . corfu-insert-separator)
-              ("TAB"        . corfu-next)
-              ([tab]        . corfu-next)
-              ("S-TAB"      . corfu-previous)
-              ([backtab]    . corfu-previous)
-              ("S-y" . corfu-insert)
-              ("RET"        . nil))
+;; ido
+(unless (package-installed-p 'smex)
+  (package-refresh-contents)
+  (package-install 'smex))
 
-  :init
-  (global-corfu-mode)
-  (corfu-history-mode)
-  (corfu-popupinfo-mode)) ; Popup completion info
+(unless (package-installed-p 'ido-completing-read+)
+  (package-refresh-contents)
+  (package-install 'ido-completing-read+))
 
-(use-package lsp-mode
-  :ensure t
-  :commands (lsp lsp-deferred)
-  :hook
-  ((c-mode . lsp-deferred)
-   (c++-mode . lsp-deferred))
-  :custom
-  (lsp-enable-snippet t))       ;; Enable snippet support
+(require 'smex)
+(require 'ido-completing-read+)
 
-(use-package yasnippet
-  :ensure t
-  :init
-  (yas-global-mode 1))           ;; Enable yasnippet globally
+(ido-mode t)
+(ido-everywhere 1)
+(ido-ubiquitous-mode 1)
+(setq ido-enable-flex-matching t)
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
-(add-hook 'c-mode-hook #'corfu-mode) ;; clangd must be installed
-(add-hook 'c++-mode-hook #'corfu-mode)
+;; company
+
+(unless (package-installed-p 'company)
+  (package-refresh-contents)
+  (package-install 'company))
+
+(add-hook 'after-init-hook 'global-company-mode)
+
+(setq company-idle-delay 0.2)          
+(setq company-minimum-prefix-length 1)
+(setq company-show-numbers t)  
+
+;; c/c++
+(add-hook 'c-mode-hook 'company-mode)
+(add-hook 'c++-mode-hook 'company-mode)
+(add-to-list 'company-backends 'company-clang)
+
+;; python
+(add-hook 'python-mode-hook 'company-mode)
+(add-to-list 'company-backends 'company-anaconda)
 
 (use-package projectile
   :ensure t
   :config
   (projectile-mode +1)
-  ;; Recommended keymap prefix on macOS/Linux
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  ;;(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-switch-project)
   (define-key projectile-mode-map (kbd "C-c g") 'projectile-grep)
   )
 
+;; git stuff
+(unless (package-installed-p 'magit)
+  (package-refresh-contents)
+  (package-install 'magit))
+(use-package magit
+  :ensure t
+  :init
+  )
 
+;; markdown stuff
+(use-package markdown-mode
+  :ensure t
+  :mode ("README\\.md\\'" . gfm-mode)
+  :init (setq markdown-command "multimarkdown"))
