@@ -21,4 +21,38 @@ A lot of stuff is sort of like in vim (because of evil mode) but a lot of stuff 
 - cycle "C-p/C-n"
 
 * Magit
+To open magit "M-x" magit-status
+- Stage Changes:
+    s: Stage the file or hunk (line/block of code) under the cursor.
+    S: Stage all changes in the working directory.
+
+- Unstage Changes:
+    u: Unstage the file or hunk under the cursor.
+    U: Unstage all staged changes.
+
+- Commit Changes:
+    c c: Commit staged changes. This opens a new buffer for you to write a commit message.
+    C-c C-c: Once you've written the commit message, press this to confirm the commit.
+
+- Viewing Logs:
+    l l: Show the log of commits.
+    l g: Show a graphical log (similar to git log --graph).
+
+- Pushing Commits:
+    P p: Push commits to the upstream branch (e.g., origin/master).
+
+- Pulling Changes:
+    F f: Fetch changes from the remote.
+    F p: Pull changes from the remote branch.
+
+- Creating and Switching Branches:
+    b b: Switch to an existing branch.
+    b n: Create a new branch.
+
+- Merging Branches:
+    m m: Merge another branch into the current one.
+
+- Rebasing:
+    r r: Start an interactive rebase.
+    r e: Edit a commit during rebase.
 
