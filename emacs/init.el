@@ -1,3 +1,11 @@
+(setq inhibit-splash-screen t)
+(menu-bar-mode -1)
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
+
+(global-display-line-numbers-mode 1)
+(setq display-line-numbers-type 'relative)
+
 ;; Set up package.el to work with MELPA
 (require 'package)
 (add-to-list 'package-archives
@@ -18,7 +26,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(magit yasnippet lsp-mode projectile corfu evil)))
+ '(package-selected-packages
+   '(flycheck elpy magit yasnippet lsp-mode projectile corfu evil)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -38,12 +47,6 @@
 
 (set-face-attribute 'default nil :font "Iosevka-11.5")
 
-(menu-bar-mode -1)
-(scroll-bar-mode -1)
-(tool-bar-mode -1)
-
-(global-display-line-numbers-mode 1)
-(setq display-line-numbers-type 'relative)
 
 ;; lsp stuff
 ;; ido
@@ -65,26 +68,43 @@
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
+;; python
+(unless (package-installed-p 'elpy)
+  (package-refresh-contents)
+  (package-install 'elpy))
+(elpy-enable)
+
+(unless (package-installed-p 'flycheck)
+  (package-refresh-contents)
+  (package-install 'flycheck))
+
+(add-hook 'after-init-hook #'global-flycheck-mode)
+
 ;; company
 
+;; Ensure 'company-mode' is installed and loaded before setting backends
 (unless (package-installed-p 'company)
   (package-refresh-contents)
   (package-install 'company))
 
+;; Enable company-mode globally
 (add-hook 'after-init-hook 'global-company-mode)
 
-(setq company-idle-delay 0.2)          
-(setq company-minimum-prefix-length 1)
-(setq company-show-numbers t)  
+;; Ensure company is loaded before modifying company-backends
+(with-eval-after-load 'company
+  (setq company-idle-delay 0.2)          
+  (setq company-minimum-prefix-length 1)
+  (setq company-show-numbers t)
+  ;; Add clang backend for C/C++ modes
+  (add-to-list 'company-backends 'company-clang))
 
-;; c/c++
+;; Enable company mode in C/C++ modes
 (add-hook 'c-mode-hook 'company-mode)
 (add-hook 'c++-mode-hook 'company-mode)
-(add-to-list 'company-backends 'company-clang)
 
-;; python
-(add-hook 'python-mode-hook 'company-mode)
-(add-to-list 'company-backends 'company-anaconda)
+;; Python (optional, commented out)
+;; (add-hook 'python-mode-hook 'company-mode)
+;; (with-eval-after-load 'company
 
 (use-package projectile
   :ensure t
@@ -109,3 +129,5 @@
   :ensure t
   :mode ("README\\.md\\'" . gfm-mode)
   :init (setq markdown-command "multimarkdown"))
+
+(setq make-backup-files nil)

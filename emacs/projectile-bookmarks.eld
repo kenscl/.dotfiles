@@ -1,1 +1,1 @@
-("~/.config/" "~/" "~/uni/" "~/e/" "~/open-source-rover/" "~/open-source-rover/open-source-rover/")
+("~/.config/" "~/" "~/uni/" "~/open-source-rover/" "~/e/" "~/open-source-rover/open-source-rover/")
