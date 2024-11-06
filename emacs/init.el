@@ -7,6 +7,7 @@
 (setq display-line-numbers-type 'relative)
 (global-set-key (kbd "C-c c") 'compile)
 
+
 (add-hook 'c-mode-hook (lambda () (c-set-style "linux")))
 (setq indent-tabs-mode t)
 ;; Set up package.el to work with MELPA
@@ -37,6 +38,22 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;; spell checking
+(setq ispell-program-name "aspell") 
+(global-set-key (kbd "C-c s s") 'flyspell-correct-word-before-point)
+(defun enable-english-spell-check ()
+  (interactive)
+  (setq ispell-local-dictionary "en")
+  (flyspell-mode 1))
+
+(defun enable-german-spell-check ()
+  (interactive)
+  (setq ispell-local-dictionary "de")
+  (flyspell-mode 1))
+
+(global-set-key (kbd "C-c e") 'enable-english-spell-check)
+(global-set-key (kbd "C-c d") 'enable-german-spell-check)
 
 (use-package catppuccin-theme
   :ensure t
