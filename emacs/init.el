@@ -8,8 +8,6 @@
 (global-set-key (kbd "C-c c") 'compile)
 
 
-(add-hook 'c-mode-hook (lambda () (c-set-style "linux")))
-(setq indent-tabs-mode t)
 ;; Set up package.el to work with MELPA
 (require 'package)
 (add-to-list 'package-archives
@@ -31,7 +29,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(auctex flycheck elpy magit yasnippet lsp-mode projectile corfu evil)))
+   '(gruber-darker-theme pet auctex flycheck elpy magit yasnippet lsp-mode projectile corfu evil)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -55,14 +53,20 @@
 (global-set-key (kbd "C-c e") 'enable-english-spell-check)
 (global-set-key (kbd "C-c d") 'enable-german-spell-check)
 
+
+(unless (package-installed-p 'gruber-darker-theme)
+  (package-install 'gruber-darker-theme))
+;;(load-theme 'gruber-darker t)
+
 (use-package catppuccin-theme
   :ensure t
   :config
   ;; Set the Catppuccin flavor (mocha, latte, macchiato, frappe)
   (setq catppuccin-flavor 'mocha) ;; or any other flavor
-  (load-theme 'catppuccin t))
+  (load-theme 'catppuccin t)
+  )
 
-(load-theme 'catppuccin :no-confirm)
+;;(load-theme 'catppuccin :no-confirm)
 (setq catpuccin-flavor 'mocha)
 
 (set-face-attribute 'default nil :font "Iosevka-11.5")
@@ -100,6 +104,7 @@
 
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
+
 ;; company
 
 ;; Ensure 'company-mode' is installed and loaded before setting backends
@@ -121,7 +126,16 @@
 ;; Enable company mode in C/C++ modes
 (add-hook 'c-mode-hook 'company-mode)
 (add-hook 'c++-mode-hook 'company-mode)
+(defun my-c-mode-hook ()
+  (setq c-basic-offset 4)
+  (setq tab-width 4)             
+  (setq indent-tabs-mode nil))   
 
+(add-hook 'c-mode-hook 'my-c-mode-hook)
+(add-hook 'c++-mode-hook 'my-c-mode-hook) 
+
+(setq c-default-style "linux"    ; Or "gnu", "bsd", "k&r", etc.
+      c-basic-offset 4)
 ;; Python (optional, commented out)
 ;; (add-hook 'python-mode-hook 'company-mode)
 ;; (with-eval-after-load 'company
@@ -157,3 +171,9 @@
   (package-install 'auctex))
 
 
+
+;; rebinds
+
+(global-set-key (kbd "C-c a") 'ff-find-other-file)
+(global-set-key (kbd "C-c C-a ") 'ff-find-other-file-other-window)
+(evil-set-undo-system 'undo-redo)
