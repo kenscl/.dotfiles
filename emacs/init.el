@@ -29,7 +29,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(gruber-darker-theme pet auctex flycheck elpy magit yasnippet lsp-mode projectile corfu evil)))
+   '(doom-modeline nord-theme vscode-dark-plus vscode-dark-plus-theme exotica-theme gruvbox-theme elpy gruber-darker-theme pet auctex flycheck magit yasnippet lsp-mode projectile corfu evil)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -57,57 +57,42 @@
 (unless (package-installed-p 'gruber-darker-theme)
   (package-install 'gruber-darker-theme))
 ;;(load-theme 'gruber-darker t)
+(unless (package-installed-p 'exotica-theme)
+  (package-install 'exotica-theme))
+;;(load-theme 'exotica t)
+(unless (package-installed-p 'nord-theme)
+  (package-install 'nord-theme))
+(load-theme 'nord t)
 
 (use-package catppuccin-theme
   :ensure t
   :config
   ;; Set the Catppuccin flavor (mocha, latte, macchiato, frappe)
   (setq catppuccin-flavor 'mocha) ;; or any other flavor
-  (load-theme 'catppuccin t)
+  ;(load-theme 'catppuccin t)
   )
 
 ;;(load-theme 'catppuccin :no-confirm)
-(setq catpuccin-flavor 'mocha)
+;;(setq catpuccin-flavor 'mocha)
 
-(set-face-attribute 'default nil :font "Iosevka-11.5")
+(set-face-attribute 'default nil :font "JuliaMono Light-11")
 
 
-;; lsp stuff
-;; ido
-(unless (package-installed-p 'smex)
-  (package-refresh-contents)
-  (package-install 'smex))
+(unless (package-installed-p 'nerd-icons)
+  (package-install 'nerd-icons))
 
-(unless (package-installed-p 'ido-completing-read+)
-  (package-refresh-contents)
-  (package-install 'ido-completing-read+))
-
-(require 'smex)
-(require 'ido-completing-read+)
-
-(ido-mode t)
-(ido-everywhere 1)
-(ido-ubiquitous-mode 1)
-(setq ido-enable-flex-matching t)
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
-
-;; python
-(unless (package-installed-p 'elpy)
-  (package-refresh-contents)
-  (package-install 'elpy))
-(elpy-enable)
-
-(unless (package-installed-p 'flycheck)
-  (package-refresh-contents)
-  (package-install 'flycheck))
-
-(add-hook 'after-init-hook #'global-flycheck-mode)
-
+(unless (package-installed-p 'doom-modeline)
+  (package-install 'doom-modeline))
+(doom-modeline-mode 1)
 
 ;; company
 
 ;; Ensure 'company-mode' is installed and loaded before setting backends
+(unless (package-installed-p 'lsp-mode)
+  (package-refresh-contents)
+  (package-install 'lsp-mode))
+(require 'lsp-mode)
+
 (unless (package-installed-p 'company)
   (package-refresh-contents)
   (package-install 'company))
@@ -166,10 +151,46 @@
 (setq make-backup-files nil)
 
 ;; LaTex
-(unless (package-installed-p 'auctex)
-  (package-refresh-contents)
-  (package-install 'auctex))
+ 	
+(use-package tex
+  :ensure auctex)
+(setq TeX-auto-save t)
+(setq TeX-parse-self t)
+(setq-default TeX-master nil)
+(set-default 'preview-scale-function 1.5)
+(eval-after-load 'tex-mode
+  '(define-key LaTeX-mode-map (kbd "C-c p") 'preview-buffer))
+(eval-after-load 'tex-mode
+  '(define-key LaTeX-mode-map (kbd "C-c P") 'preview-clearout))
 
+;; lsp stuff
+;; ido
+(unless (package-installed-p 'smex)
+  (package-refresh-contents)
+  (package-install 'smex))
+
+(unless (package-installed-p 'ido-completing-read+)
+  (package-refresh-contents)
+  (package-install 'ido-completing-read+))
+
+(require 'smex)
+(require 'ido-completing-read+)
+
+(ido-mode t)
+(ido-everywhere 1)
+(ido-ubiquitous-mode 1)
+(setq ido-enable-flex-matching t)
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+
+
+;; python
+(use-package elpy
+  :ensure t
+  :init
+  (elpy-enable))
+(setq elpy-rpc-python-command "python3")
+(setq elpy-rpc-verbose t)
 
 
 ;; rebinds
