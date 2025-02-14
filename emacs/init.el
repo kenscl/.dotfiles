@@ -29,7 +29,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(doom-modeline nord-theme vscode-dark-plus vscode-dark-plus-theme exotica-theme gruvbox-theme elpy gruber-darker-theme pet auctex flycheck magit yasnippet lsp-mode projectile corfu evil)))
+   '(neofusion-theme lsp-ui company-irony company-cmake company-clang doom-modeline nord-theme vscode-dark-plus vscode-dark-plus-theme exotica-theme gruvbox-theme elpy gruber-darker-theme pet auctex flycheck magit yasnippet lsp-mode projectile corfu evil)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -62,7 +62,7 @@
 ;;(load-theme 'exotica t)
 (unless (package-installed-p 'nord-theme)
   (package-install 'nord-theme))
-(load-theme 'nord t)
+;;(load-theme 'neofusion t)
 
 (use-package catppuccin-theme
   :ensure t
@@ -72,10 +72,9 @@
   ;(load-theme 'catppuccin t)
   )
 
-;;(load-theme 'catppuccin :no-confirm)
-;;(setq catpuccin-flavor 'mocha)
+(load-theme 'catppuccin :no-confirm)
 
-(set-face-attribute 'default nil :font "JuliaMono Light-11")
+(set-face-attribute 'default nil :font "Iosevka-11")
 
 
 (unless (package-installed-p 'nerd-icons)
@@ -88,10 +87,14 @@
 ;; company
 
 ;; Ensure 'company-mode' is installed and loaded before setting backends
-(unless (package-installed-p 'lsp-mode)
-  (package-refresh-contents)
-  (package-install 'lsp-mode))
-(require 'lsp-mode)
+(use-package lsp-mode
+  :ensure t
+  :hook ((c-mode c++-mode) . lsp)
+  :commands lsp)
+
+(use-package lsp-ui
+  :ensure t
+  :commands lsp-ui-mode)
 
 (unless (package-installed-p 'company)
   (package-refresh-contents)
@@ -102,13 +105,13 @@
 
 ;; Ensure company is loaded before modifying company-backends
 (with-eval-after-load 'company
-  (setq company-idle-delay 0.2)          
+  (setq company-idle-delay 0.1)          
   (setq company-minimum-prefix-length 1)
   (setq company-show-numbers t)
   ;; Add clang backend for C/C++ modes
   (add-to-list 'company-backends 'company-clang))
 
-;; Enable company mode in C/C++ modes
+
 (add-hook 'c-mode-hook 'company-mode)
 (add-hook 'c++-mode-hook 'company-mode)
 (defun my-c-mode-hook ()
