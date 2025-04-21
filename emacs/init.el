@@ -23,13 +23,40 @@
 ;; Enable Evil
 (require 'evil)
 (evil-mode 1)
+(define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
+(define-key evil-visual-state-map (kbd "C-u") 'evil-scroll-up)
+(define-key evil-insert-state-map (kbd "C-u")
+  (lambda ()
+    (interactive)
+    (evil-delete (point-at-bol) (point))))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(neofusion-theme lsp-ui company-irony company-cmake company-clang doom-modeline nord-theme vscode-dark-plus vscode-dark-plus-theme exotica-theme gruvbox-theme elpy gruber-darker-theme pet auctex flycheck magit yasnippet lsp-mode projectile corfu evil)))
+ '(custom-safe-themes
+   '("0325a6b5eea7e5febae709dab35ec8648908af12cf2d2b569bedc8da0a3a81c1"
+     "456697e914823ee45365b843c89fbc79191fdbaff471b29aad9dcbe0ee1d5641"
+     "9e36779f5244f7d715d206158a3dade839d4ccb17f6a2f0108bf8d476160a221"
+     "014cb63097fc7dbda3edf53eb09802237961cbb4c9e9abd705f23b86511b0a69"
+     "7964b513f8a2bb14803e717e0ac0123f100fb92160dcf4a467f530868ebaae3e"
+     "7ec8fd456c0c117c99e3a3b16aaf09ed3fb91879f6601b1ea0eeaee9c6def5d9"
+     "7c28419e963b04bf7ad14f3d8f6655c078de75e4944843ef9522dbecfcd8717d"
+     "e14884c30d875c64f6a9cdd68fe87ef94385550cab4890182197b95d53a7cf40"
+     "691d671429fa6c6d73098fc6ff05d4a14a323ea0a18787daeb93fde0e48ab18b"
+     "4e2e42e9306813763e2e62f115da71b485458a36e8b4c24e17a2168c45c9cf9d"
+     "dccf4a8f1aaf5f24d2ab63af1aa75fd9d535c83377f8e26380162e888be0c6a9"
+     "b5fd9c7429d52190235f2383e47d340d7ff769f141cd8f9e7a4629a81abc6b19"
+     "571661a9d205cb32dfed5566019ad54f5bb3415d2d88f7ea1d00c7c794e70a36"
+     "b754d3a03c34cfba9ad7991380d26984ebd0761925773530e24d8dd8b6894738"
+     "6e13ff2c27cf87f095db987bf30beca8697814b90cd837ef4edca18bdd381901"
+     "18a1d83b4e16993189749494d75e6adb0e15452c80c431aca4a867bcc8890ca9"
+     "c4a66d0d9557de08eadd6cc25112bd7eb776d8c8754ed8cc4e1b16d0c317433c"
+     "4d16802de4686030ed8f30b5a844713d68edec9cc07322bef54493d15e68d8cd"
+     "e9aa348abd3713a75f2c5ba279aa581b1c6ec187ebefbfa33373083ff8004c7c"
+     "6454421996f0508c38215a633256e36c19a28591542fb0946cfc40f1dceb89cf"
+     default))
+ '(package-selected-packages nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -64,15 +91,48 @@
   (package-install 'nord-theme))
 ;;(load-theme 'neofusion t)
 
+(unless (package-installed-p 'gruvbox-theme)
+  (package-install 'gruvbox-theme))
+;;(load-theme 'gruvbox-dark-hard t)
+
+;; git clone https://github.com/konrad1977/pinerose-emacs.git ~/.config/emacs/themes/pinerose
+
+(add-to-list 'custom-theme-load-path "~/.config/emacs/themes/pinerose")
+(load-theme 'rose-pine t)
+
+(unless (package-installed-p 'jetbrains-darcula-theme)
+  (package-install 'jetbrains-darcula-theme))
+;;(use-package jetbrains-darcula-theme
+;;  :config
+;;  (load-theme 'jetbrains-darcula t))
+
+(use-package doom-themes
+  :ensure t
+  :config
+  ;; Global settings (defaults)
+  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  ;(load-theme 'doom-acario-light t)
+
+  ;; Enable flashing mode-line on errors
+  (doom-themes-visual-bell-config)
+  ;; Enable custom neotree theme (nerd-icons must be installed!)
+  (doom-themes-neotree-config)
+  ;; or for treemacs users
+  (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
+  (doom-themes-treemacs-config)
+  ;; Corrects (and improves) org-mode's native fontification.
+  (doom-themes-org-config))
+
 (use-package catppuccin-theme
   :ensure t
   :config
   ;; Set the Catppuccin flavor (mocha, latte, macchiato, frappe)
-  (setq catppuccin-flavor 'mocha) ;; or any other flavor
+  (setq catppuccin-flavor 'latte) ;; or any other flavor
   ;(load-theme 'catppuccin t)
   )
 
-(load-theme 'catppuccin :no-confirm)
+;;(load-theme 'catppuccin :no-confirm)
 
 (set-face-attribute 'default nil :font "Iosevka-11")
 
@@ -105,28 +165,19 @@
 
 ;; Ensure company is loaded before modifying company-backends
 (with-eval-after-load 'company
-  (setq company-idle-delay 0.1)          
+  (setq company-idle-delay 0.05)          
   (setq company-minimum-prefix-length 1)
   (setq company-show-numbers t)
   ;; Add clang backend for C/C++ modes
   (add-to-list 'company-backends 'company-clang))
 
-
 (add-hook 'c-mode-hook 'company-mode)
 (add-hook 'c++-mode-hook 'company-mode)
-(defun my-c-mode-hook ()
-  (setq c-basic-offset 4)
-  (setq tab-width 4)             
-  (setq indent-tabs-mode nil))   
 
-(add-hook 'c-mode-hook 'my-c-mode-hook)
-(add-hook 'c++-mode-hook 'my-c-mode-hook) 
-
-(setq c-default-style "linux"    ; Or "gnu", "bsd", "k&r", etc.
-      c-basic-offset 4)
-;; Python (optional, commented out)
-;; (add-hook 'python-mode-hook 'company-mode)
-;; (with-eval-after-load 'company
+(unless (package-installed-p 'clang-format)
+  (package-refresh-contents)
+  (package-install 'clang-format))
+(setq clang-format-style "llvm")
 
 (use-package projectile
   :ensure t
