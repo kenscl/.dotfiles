@@ -1,7 +1,7 @@
 require("config.lazy")
 require("config.set")
 require("config.remap")
-vim.cmd ":colorscheme catppuccin-macchiato"
+vim.cmd ":colorscheme catppuccin-mocha"
 require("mason").setup()
 vim.cmd [[
   highlight Normal guibg=none
