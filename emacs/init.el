@@ -56,7 +56,12 @@
      "e9aa348abd3713a75f2c5ba279aa581b1c6ec187ebefbfa33373083ff8004c7c"
      "6454421996f0508c38215a633256e36c19a28591542fb0946cfc40f1dceb89cf"
      default))
- '(package-selected-packages nil))
+ '(package-selected-packages
+   '(auctex catppuccin-theme clang-format company-irony corfu
+	    doom-modeline doom-themes elpy evil exotica-theme flycheck
+	    gruber-darker-theme gruvbox-theme highlight-indent-guides
+	    ido-completing-read+ jetbrains-darcula-theme lsp-ui magit
+	    nord-theme projectile smex vscode-dark-plus-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -134,7 +139,7 @@
 
 ;;(load-theme 'catppuccin :no-confirm)
 
-(set-face-attribute 'default nil :font "Iosevka-11")
+(set-face-attribute 'default nil :font "Iosevka-11.5")
 
 
 (unless (package-installed-p 'nerd-icons)
@@ -245,6 +250,17 @@
   (elpy-enable))
 (setq elpy-rpc-python-command "python3")
 (setq elpy-rpc-verbose t)
+
+
+;; indent guides
+(use-package highlight-indent-guides
+  :ensure t
+  :init 
+  )
+(setq highlight-indent-guides-method 'bitmap)
+(setq highlight-indent-guides-bitmap-function 'highlight-indent-guides--bitmap-line)
+(setq highlight-indent-guides-auto-character-face-perc 60)
+(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 
 
 ;; rebinds
