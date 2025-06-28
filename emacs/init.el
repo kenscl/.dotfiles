@@ -1,4 +1,4 @@
-(Setq inhibit-splash-screen t)
+(setq inhibit-splash-screen t)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
@@ -91,7 +91,8 @@
 
 (unless (package-installed-p 'gruber-darker-theme)
   (package-install 'gruber-darker-theme))
-;;(load-theme 'gruber-darker t)
+(load-theme 'gruber-darker t)
+
 (unless (package-installed-p 'exotica-theme)
   (package-install 'exotica-theme))
 ;;(load-theme 'exotica t)
@@ -105,7 +106,7 @@
 
 ;; git clone https://github.com/konrad1977/pinerose-emacs.git ~/.config/emacs/themes/pinerose
 
-(add-to-list 'custom-theme-load-path "~/.config/emacs/themes/pinerose")
+;(add-to-list 'custom-theme-load-path "~/.config/emacs/themes/pinerose")
 ;(load-theme 'rose-pine t)
 
 (unless (package-installed-p 'jetbrains-darcula-theme)
@@ -114,23 +115,23 @@
 ;;  :config
 ;;  (load-theme 'jetbrains-darcula t))
 
-(use-package doom-themes
-  :ensure t
-  :config
-  ;; Global settings (defaults)
-  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-        doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  (load-theme 'doom-material t)
-
-  ;; Enable flashing mode-line on errors
-  (doom-themes-visual-bell-config)
-  ;; Enable custom neotree theme (nerd-icons must be installed!)
-  (doom-themes-neotree-config)
-  ;; or for treemacs users
-  (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
-  (doom-themes-treemacs-config)
-  ;; Corrects (and improves) org-mode's native fontification.
-  (doom-themes-org-config))
+;(use-package doom-themes
+;  :ensure t
+;  :config
+;  ;; Global settings (defaults)
+;  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+;        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+;  (load-theme 'doom-material t)
+;
+;  ;; Enable flashing mode-line on errors
+;  (doom-themes-visual-bell-config)
+;  ;; Enable custom neotree theme (nerd-icons must be installed!)
+;  (doom-themes-neotree-config)
+;  ;; or for treemacs users
+;  (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
+;  (doom-themes-treemacs-config)
+;  ;; Corrects (and improves) org-mode's native fontification.
+;  (doom-themes-org-config))
 
 (use-package catppuccin-theme
   :ensure t
