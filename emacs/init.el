@@ -1,4 +1,4 @@
-(setq inhibit-splash-screen t)
+(Setq inhibit-splash-screen t)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
@@ -57,11 +57,12 @@
      "6454421996f0508c38215a633256e36c19a28591542fb0946cfc40f1dceb89cf"
      default))
  '(package-selected-packages
-   '(auctex catppuccin-theme clang-format company-irony corfu
+   '(auctex catppuccin-theme clang-format company-irony corfu csv-mode
 	    doom-modeline doom-themes elpy evil exotica-theme flycheck
 	    gruber-darker-theme gruvbox-theme highlight-indent-guides
 	    ido-completing-read+ jetbrains-darcula-theme lsp-ui magit
-	    nord-theme projectile smex vscode-dark-plus-theme)))
+	    nord-theme org-present pdf-tools projectile smex
+	    vscode-dark-plus-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -81,6 +82,8 @@
   (interactive)
   (setq ispell-local-dictionary "de")
   (flyspell-mode 1))
+
+
 
 (global-set-key (kbd "C-c e") 'enable-english-spell-check)
 (global-set-key (kbd "C-c d") 'enable-german-spell-check)
@@ -103,7 +106,7 @@
 ;; git clone https://github.com/konrad1977/pinerose-emacs.git ~/.config/emacs/themes/pinerose
 
 (add-to-list 'custom-theme-load-path "~/.config/emacs/themes/pinerose")
-(load-theme 'rose-pine t)
+;(load-theme 'rose-pine t)
 
 (unless (package-installed-p 'jetbrains-darcula-theme)
   (package-install 'jetbrains-darcula-theme))
@@ -117,7 +120,7 @@
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  ;(load-theme 'doom-acario-light t)
+  (load-theme 'doom-material t)
 
   ;; Enable flashing mode-line on errors
   (doom-themes-visual-bell-config)
@@ -140,7 +143,6 @@
 ;;(load-theme 'catppuccin :no-confirm)
 
 (set-face-attribute 'default nil :font "Iosevka-11.5")
-
 
 (unless (package-installed-p 'nerd-icons)
   (package-install 'nerd-icons))
@@ -205,7 +207,9 @@
 (use-package markdown-mode
   :ensure t
   :mode ("README\\.md\\'" . gfm-mode)
-  :init (setq markdown-command "multimarkdown"))
+  :init (setq markdown-command "multimarkdown")
+  :bind (:map markdown-mode-map
+         ("C-c C-e" . markdown-do)))
 
 (setq make-backup-files nil)
 
@@ -221,6 +225,7 @@
   '(define-key LaTeX-mode-map (kbd "C-c p") 'preview-buffer))
 (eval-after-load 'tex-mode
   '(define-key LaTeX-mode-map (kbd "C-c P") 'preview-clearout))
+
 
 ;; lsp stuff
 ;; ido
@@ -251,6 +256,30 @@
 (setq elpy-rpc-python-command "python3")
 (setq elpy-rpc-verbose t)
 
+;; csv
+(use-package csv-mode 
+  :ensure t
+  :init 
+  )
+
+(use-package org-present 
+  :ensure t
+  :init 
+  )
+(eval-after-load "org-present"
+  '(progn
+     (add-hook 'org-present-mode-hook
+               (lambda ()
+                 (org-present-big)
+                 (org-display-inline-images)
+                 (org-present-hide-cursor)
+                 (org-present-read-only)))
+     (add-hook 'org-present-mode-quit-hook
+               (lambda ()
+                 (org-present-small)
+                 (org-remove-inline-images)
+                 (org-present-show-cursor)
+                 (org-present-read-write)))))
 
 ;; indent guides
 (use-package highlight-indent-guides
@@ -263,8 +292,17 @@
 (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 
 
+;; pdf
+
+(use-package pdf-tools
+  :ensure t
+  :config
+  (pdf-tools-install))
+
+
 ;; rebinds
 
 (global-set-key (kbd "C-c a") 'ff-find-other-file)
 (global-set-key (kbd "C-c C-a ") 'ff-find-other-file-other-window)
 (evil-set-undo-system 'undo-redo)
+
