@@ -35,7 +35,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("0325a6b5eea7e5febae709dab35ec8648908af12cf2d2b569bedc8da0a3a81c1"
+   '("acfe7ff6aacb9432f124cde4e35d6d2b4bc52916411de73a6ccded9750c9fa97"
+     "dc15dbd4b0a00c64610fd4379a89424e0be1b418f09457e0f062cac931e8ca82"
+     "0325a6b5eea7e5febae709dab35ec8648908af12cf2d2b569bedc8da0a3a81c1"
      "456697e914823ee45365b843c89fbc79191fdbaff471b29aad9dcbe0ee1d5641"
      "9e36779f5244f7d715d206158a3dade839d4ccb17f6a2f0108bf8d476160a221"
      "014cb63097fc7dbda3edf53eb09802237961cbb4c9e9abd705f23b86511b0a69"
@@ -61,8 +63,8 @@
 	    doom-modeline doom-themes elpy evil exotica-theme flycheck
 	    gruber-darker-theme gruvbox-theme highlight-indent-guides
 	    ido-completing-read+ jetbrains-darcula-theme lsp-ui magit
-	    nord-theme org-present pdf-tools projectile smex
-	    vscode-dark-plus-theme)))
+	    minimal-theme nord-theme org-present pdf-tools projectile
+	    smex tao-theme vscode-dark-plus-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -88,17 +90,10 @@
 (global-set-key (kbd "C-c e") 'enable-english-spell-check)
 (global-set-key (kbd "C-c d") 'enable-german-spell-check)
 
-
+(load-theme 'leuven t)
 (unless (package-installed-p 'gruber-darker-theme)
   (package-install 'gruber-darker-theme))
-(load-theme 'gruber-darker t)
-
-(unless (package-installed-p 'exotica-theme)
-  (package-install 'exotica-theme))
-;;(load-theme 'exotica t)
-(unless (package-installed-p 'nord-theme)
-  (package-install 'nord-theme))
-;;(load-theme 'neofusion t)
+;(load-theme 'gruber-darker t)
 
 (unless (package-installed-p 'gruvbox-theme)
   (package-install 'gruvbox-theme))
@@ -121,7 +116,7 @@
 ;  ;; Global settings (defaults)
 ;  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
 ;        doom-themes-enable-italic t) ; if nil, italics is universally disabled
-;  (load-theme 'doom-material t)
+;  (load-theme 'doom-opera-light t)
 ;
 ;  ;; Enable flashing mode-line on errors
 ;  (doom-themes-visual-bell-config)
@@ -137,13 +132,16 @@
   :ensure t
   :config
   ;; Set the Catppuccin flavor (mocha, latte, macchiato, frappe)
-  (setq catppuccin-flavor 'latte) ;; or any other flavor
+  (setq catppuccin-flavor 'mocha) ;; or any other flavor
   ;(load-theme 'catppuccin t)
   )
 
 ;;(load-theme 'catppuccin :no-confirm)
 
-(set-face-attribute 'default nil :font "Iosevka-11.5")
+;(set-face-attribute 'default nil :font "Iosevka-11.5")
+(set-face-attribute 'default nil :font "Atkinson Hyperlegible Mono-11.3")
+(setq-default line-spacing 0.2)
+;(set-face-attribute 'default nil :font "Jetbrains Mono-11")
 
 (unless (package-installed-p 'nerd-icons)
   (package-install 'nerd-icons))
