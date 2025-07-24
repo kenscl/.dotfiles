@@ -139,9 +139,9 @@
 ;;(load-theme 'catppuccin :no-confirm)
 
 ;(set-face-attribute 'default nil :font "Iosevka-11.5")
+;(set-face-attribute 'default nil :font "Jetbrains Mono-11")
 (set-face-attribute 'default nil :font "Atkinson Hyperlegible Mono-11.3")
 (setq-default line-spacing 0.2)
-;(set-face-attribute 'default nil :font "Jetbrains Mono-11")
 
 (unless (package-installed-p 'nerd-icons)
   (package-install 'nerd-icons))
@@ -151,7 +151,6 @@
 (doom-modeline-mode 1)
 
 ;; company
-
 ;; Ensure 'company-mode' is installed and loaded before setting backends
 (use-package lsp-mode
   :ensure t

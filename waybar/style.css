@@ -1,8 +1,8 @@
 @import "macchiato.css";
 * {
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: Iosevka, JetbrainsMono, FontAwesome, Roboto, Helvetica, Arial, sans-serif;
-    font-size: 13px;
+    font-family: Atkinson Hyperlegible; /*,Iosevka, JetbrainsMono, FontAwesome, Roboto, Helvetica, Arial, sans-serif; */
+    font-size: 15;
     padding: 0;
     margin: 0;
 }
