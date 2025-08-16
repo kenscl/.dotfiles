@@ -90,7 +90,10 @@
 (global-set-key (kbd "C-c e") 'enable-english-spell-check)
 (global-set-key (kbd "C-c d") 'enable-german-spell-check)
 
-(load-theme 'leuven t)
+(use-package autothemer
+  :ensure t)
+
+;(load-theme 'leuven t)
 (unless (package-installed-p 'gruber-darker-theme)
   (package-install 'gruber-darker-theme))
 ;(load-theme 'gruber-darker t)
@@ -103,6 +106,9 @@
 
 ;(add-to-list 'custom-theme-load-path "~/.config/emacs/themes/pinerose")
 ;(load-theme 'rose-pine t)
+
+(add-to-list 'custom-theme-load-path "~/.config/emacs/themes")
+(load-theme 'white t)
 
 (unless (package-installed-p 'jetbrains-darcula-theme)
   (package-install 'jetbrains-darcula-theme))
