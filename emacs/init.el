@@ -68,12 +68,13 @@
      "6454421996f0508c38215a633256e36c19a28591542fb0946cfc40f1dceb89cf"
      default))
  '(package-selected-packages
-   '(auctex catppuccin-theme clang-format company-irony corfu csv-mode
-	    doom-modeline doom-themes elpy evil exotica-theme flycheck
-	    gruber-darker-theme gruvbox-theme highlight-indent-guides
-	    ido-completing-read+ jetbrains-darcula-theme lsp-ui magit
-	    minimal-theme nord-theme org-present pdf-tools projectile
-	    smex tao-theme vscode-dark-plus-theme)))
+   '(auctex catppuccin-theme clang-format company-irony company-jedi
+	    corfu csv-mode doom-modeline doom-themes elpy evil
+	    exotica-theme flycheck gruber-darker-theme gruvbox-theme
+	    highlight-indent-guides ido-completing-read+
+	    jetbrains-darcula-theme lsp-ui magit minimal-theme
+	    nord-theme org-present pdf-tools projectile smex tao-theme
+	    vscode-dark-plus-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -262,12 +263,18 @@
 
 
 ;; python
+(which-function-mode 1)
+
 (use-package elpy
   :ensure t
   :init
   (elpy-enable))
 (setq elpy-rpc-python-command "python3")
 (setq elpy-rpc-verbose t)
+(setq mode-line-format
+      (list
+       '(:eval (which-function))))
+
 
 ;; csv
 (use-package csv-mode 
