@@ -74,7 +74,7 @@
 	    highlight-indent-guides ido-completing-read+
 	    jetbrains-darcula-theme lsp-ui magit minimal-theme
 	    nord-theme org-present pdf-tools projectile smex tao-theme
-	    vscode-dark-plus-theme)))
+	    vscode-dark-plus-theme vterm)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -275,6 +275,18 @@
       (list
        '(:eval (which-function))))
 
+(use-package pyvenv
+  :ensure t)
+(require 'pyvenv)
+
+;; Optional: automatically update environment for Elpy
+(add-hook 'pyvenv-post-activate-hooks
+          (lambda ()
+            (elpy-rpc-restart)))  ;; Restart Elpy to use the venv
+
+;; terminal
+(use-package vterm
+  :ensure t)
 
 ;; csv
 (use-package csv-mode 
