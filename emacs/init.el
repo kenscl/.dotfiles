@@ -35,7 +35,37 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("e1d4f36173bed9ea718e4c30b16af7ad56bf54e108f31d8277406acaa2404437"
+   '("c8a6ababd69b91deba7284f156c0a2ec615215434aeca0cf36590fdb96dd0c58"
+     "5f718188e0d4a8d4c3aa8c963882dbc1e07e1bc2a06dbee229ba97ec9509613c"
+     "e49fb647ec571a952b5848ac10fd4a18c021d5ce0ff43cfff8a96066f4614724"
+     "c744e232bfb53d3487e2b64b72521278551b5cb1c0569adaa9997080647a1c24"
+     "849106058070e2b10af2974cd1ffd3432ee8db84ca9b4797fefaa8d653d58d51"
+     "69cb9ac6b8fe34eddbd1b3d2a143d2ddb7fb8b90eb35af9fa661ebf7f9e612a3"
+     "9ecf6f5b90da5eb9b7d2dd9f716d24ff88525c35580627ba5d6f07052cce9adc"
+     "53fa107007750adc936c3572aa329a5ccdc3e462dfcf3a3ee7742ec21fcf1277"
+     "dad6f51b5907e3bab20e8e8745062d96bfed8b8aef31e50f82c3f67e89bf74ca"
+     "f8d6c80c6da70dd054d42755f46c305e09966a3b1b96ab2b76beac54ff690678"
+     "4e60f4daed252877a303e3e82e4da2709fdc49be662046ef188b6625e9cdb09b"
+     "9a647f02094a23b19de52af523d798afea3bcccdc8f4ebd63f067acd794beec7"
+     "10f88ec53f01a73eb4ac410316a3ab62128419db896a8135649850ca3b3fc187"
+     "dbdc789abc3ea83ce87e67780b3d96182f19ac63d06135f70cf23e7c6ed34037"
+     "d74ab1838fe1e0a4dadc50441b6145418e073921e619847c959cb3d92904c217"
+     "8381698df75f6157af173700bbd7d06f5bc8d291d43dcdcbe2f42d06521eb332"
+     "9bddff2a01d18d63d59e668edb0bbf69306ddc770054ca99c4b11e8aeea22ce1"
+     "f52053d634ce9b996234acbb2085a50f7e198fabb1f1ab361f6f0f3b15434ea3"
+     "2137c1c44aada10bc6fa24327132b90001d0032cdea300b62f42ff6300576e37"
+     "9197b55c4d9f9ad3fce1703ee13af31587eb9367a069c2b8496c87d67a7973b8"
+     "cb076a9838a2274e7f7ab34eebdd4496946744191cdd2eea41fa740fc1b38be9"
+     "6e8d30f3c7bb0c094c3f857db160b2271ea976f6d225088210fd9571c553657c"
+     "538d8ee820537573605c3432ff54187594ebf5161d28c437c72477d5d5979a4e"
+     "0085fc779c87e5f102c22899c94480c4592cbec299010680748b879cde3e6d43"
+     "8518952ad3b9637b1d5b124e898ea0b80c3b3672cadde503a6181b8a31429987"
+     "d30862d0006c468cd6894e113fa013725b42a98b85152d4421165f0a100da890"
+     "16a98aa7275d7630ad261b78e7c9ae619fa927b616e296357b4effc02ca94c67"
+     "c88bf26ab14abd8c2f4f53244b3432ba02c676494d74edcd1d7c8b5dc0deb5dd"
+     "0b95863af97a35d496550f5b31e0a983e2b307ff56a8da421199c3582427d5a6"
+     "8ceabff283136b184f097f6c6cf196284bd8f42b4aa1fc4c01ae1f8ed363c5db"
+     "e1d4f36173bed9ea718e4c30b16af7ad56bf54e108f31d8277406acaa2404437"
      "db131fffb5ade0858db828b62fa0b3bf71c3cf7e38b6072b2090c442ea66a629"
      "356440b6930efb4b8d8ca5ca007b08efe9a8a7606f1470ce290fa1b4db17c04d"
      "dd97a39e50cd85db11d079316d5c2140b85e552d24062564db635e6981a6a246"
@@ -71,7 +101,7 @@
    '(auctex catppuccin-theme clang-format company-irony company-jedi
 	    corfu csv-mode doom-modeline doom-themes elpy evil
 	    exotica-theme flycheck gruber-darker-theme gruvbox-theme
-	    highlight-indent-guides ido-completing-read+
+	    highlight-indent-guides ido-completing-read+ imenu-list
 	    jetbrains-darcula-theme lsp-ui magit minimal-theme
 	    nord-theme org-present pdf-tools projectile smex tao-theme
 	    vscode-dark-plus-theme vterm)))
@@ -103,61 +133,14 @@
 (use-package autothemer
   :ensure t)
 
-;(load-theme 'leuven t)
-(unless (package-installed-p 'gruber-darker-theme)
-  (package-install 'gruber-darker-theme))
-;(load-theme 'gruber-darker t)
-
-(unless (package-installed-p 'gruvbox-theme)
-  (package-install 'gruvbox-theme))
-;;(load-theme 'gruvbox-dark-hard t)
-
-;; git clone https://github.com/konrad1977/pinerose-emacs.git ~/.config/emacs/themes/pinerose
-
-;(add-to-list 'custom-theme-load-path "~/.config/emacs/themes/pinerose")
-;(load-theme 'rose-pine t)
-
 (add-to-list 'custom-theme-load-path "~/.config/emacs/themes")
 (load-theme 'white t)
-
-(unless (package-installed-p 'jetbrains-darcula-theme)
-  (package-install 'jetbrains-darcula-theme))
-;;(use-package jetbrains-darcula-theme
-;;  :config
-;;  (load-theme 'jetbrains-darcula t))
-
-;(use-package doom-themes
-;  :ensure t
-;  :config
-;  ;; Global settings (defaults)
-;  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-;        doom-themes-enable-italic t) ; if nil, italics is universally disabled
-;  (load-theme 'doom-opera-light t)
-;
-;  ;; Enable flashing mode-line on errors
-;  (doom-themes-visual-bell-config)
-;  ;; Enable custom neotree theme (nerd-icons must be installed!)
-;  (doom-themes-neotree-config)
-;  ;; or for treemacs users
-;  (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
-;  (doom-themes-treemacs-config)
-;  ;; Corrects (and improves) org-mode's native fontification.
-;  (doom-themes-org-config))
-
-(use-package catppuccin-theme
-  :ensure t
-  :config
-  ;; Set the Catppuccin flavor (mocha, latte, macchiato, frappe)
-  (setq catppuccin-flavor 'mocha) ;; or any other flavor
-  ;(load-theme 'catppuccin t)
-  )
-
-;;(load-theme 'catppuccin :no-confirm)
+;(load-theme 'black t)
 
 ;(set-face-attribute 'default nil :font "Iosevka-11.5")
 ;(set-face-attribute 'default nil :font "Jetbrains Mono-11")
-(set-face-attribute 'default nil :font "Atkinson Hyperlegible Mono-11.3")
-(setq-default line-spacing 0.2)
+(set-face-attribute 'default nil :font "Atkinson Hyperlegible Mono-11.5")
+(setq-default line-spacing 0.0)
 
 (unless (package-installed-p 'nerd-icons)
   (package-install 'nerd-icons))
@@ -186,7 +169,7 @@
 
 ;; Ensure company is loaded before modifying company-backends
 (with-eval-after-load 'company
-  (setq company-idle-delay 0.05)          
+  (setq company-idle-delay 0.01)          
   (setq company-minimum-prefix-length 1)
   (setq company-show-numbers t)
   ;; Add clang backend for C/C++ modes
@@ -298,6 +281,7 @@
   :ensure t
   :init 
   )
+
 (eval-after-load "org-present"
   '(progn
      (add-hook 'org-present-mode-hook
@@ -313,16 +297,6 @@
                  (org-present-show-cursor)
                  (org-present-read-write)))))
 
-;; indent guides
-(use-package highlight-indent-guides
-  :ensure t
-  :init 
-  )
-(setq highlight-indent-guides-method 'bitmap)
-(setq highlight-indent-guides-bitmap-function 'highlight-indent-guides--bitmap-line)
-(setq highlight-indent-guides-auto-character-face-perc 60)
-(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
-
 
 ;; pdf
 
@@ -331,10 +305,19 @@
   :config
   (pdf-tools-install))
 
+;; imenu
+(use-package imenu-list
+  :ensure t
+  :config)
 
-;; rebinds
-
+; rebinds
+;; files
 (global-set-key (kbd "C-c a") 'ff-find-other-file)
 (global-set-key (kbd "C-c C-a ") 'ff-find-other-file-other-window)
+
+;; imenu
+(global-set-key (kbd "C-c i") 'imenu-list)
+
+;; other stuff
 (evil-set-undo-system 'undo-redo)
 
