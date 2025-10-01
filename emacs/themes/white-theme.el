@@ -6,14 +6,14 @@
 
   ;; Define our color palette
   (w-black      "#191919")
-  (w-white      "#ffffff")
+  (w-white      "#F8F8F8")
   (w-gray       "#3D3D3D")
   (w-l-gray     "#666666")
   (w-blue       "#276FBF")
   (w-purple     "#A63446")
   (w-ll-gray    "#C2C2C2")
   (w-viridian   "#2A7F62")
-  (w-red        "#675283")
+  (w-red        "#675283") ;; actually its more purple right now
   (w-tst        "#4FB477")
   (w-warn       "#ECA72C")
   (w-err        "#DC493A")
