@@ -35,7 +35,25 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("ce4d5a04e9fddfc68d4b7970a89d764ff1c8698935b282b816fc3cb546fbbd05"
+   '("8df271b95462b5441d2bf6bf7e788e5875d8881c6e3ecd4a72451f4723c7ce4c"
+     "299c5ff73c3e0fb6d08ae3b337578e9e3725fa2b087bc1ab116489f0818134f7"
+     "e17487045d287a2619f08c4d923a26fb07be2df58eedbef973789480c080345b"
+     "f7255b9830f66c322da648fa3fe6e697ca69c8b8b54c72a4cfc5eafe7a75a5ef"
+     "19d07998cb84e362c99640904cbf0d202fe9712f8e9584b2c4af6f7bdc7e4148"
+     "b912bf450512a2018310db509c000b4dbf7e2cb8c74e996c7cbae59b7fa1edea"
+     "825ecb29254db7ac3704a2d1f0d178fba2bf96544db5b8eefaa62bb8fcc65dc3"
+     "fa3aefcd69d90a21e4efbb07e35d62df4aa161820bbb0f8e3b3a6c2e1c6db743"
+     "7fe72e94a1f9034ca3daafad61a9e957168cdbcabb22b4a6a57a9f8d028be88b"
+     "939299334c12a2bdba7cb8bd2eab1bac66798125b628a2572653bafa62984aab"
+     "872b71616a92b0f4f849a223073d9107fb35650385c0046d34452b57228c6b6e"
+     "4720b9e4bba3626a980558a65e4c8b3ae799a26f0b464a69b185ff5aaf107274"
+     "c17ee75652ab93f1bb4ec01f1ab6ee5116a238f21923a5d1fc7a0a9665bfdf3f"
+     "0dce5c7b1a3c5219c6b2b2767b4bec9ae19bda5dbe7e3d005e444c6a0893fd92"
+     "8391a7ce4990f0f888e4b10e3428d4395758daf54534c43bdf793d3e3c57f9cf"
+     "62e3f4b75bd7dc9bcb2ad2c036afc4da5c3f1fdd61eef523e3d43ec17c8fbadb"
+     "e5656c2f4ad62c78c0f3cdaed1e012032574ece66baa0a3c69dff102c17b1cf3"
+     "a0eae714fb70bedaac4369f7ed1e3d5ab46f5c9a2e0d8173c60ac2e97faaddb6"
+     "ce4d5a04e9fddfc68d4b7970a89d764ff1c8698935b282b816fc3cb546fbbd05"
      "de8c7d51c30472840806fc36d5b10af53e0584a0db797bb8e7e18b5841cfe892"
      "dd3492e005ad95b761f507174b085f936b0e0f4c81e9f64ad2bca6dedb94dac1"
      "e39e581293716fb8195fedeb69f50336347899e320352b76f670ec1f81155e74"
@@ -143,9 +161,9 @@
 (load-theme 'white t)
 ;(load-theme 'black t)
 
-;(set-face-attribute 'default nil :font "Iosevka-11.5")
+(set-face-attribute 'default nil :font "Iosevka-12")
 ;(set-face-attribute 'default nil :font "Jetbrains Mono-11")
-(set-face-attribute 'default nil :font "Atkinson Hyperlegible Mono-11.5")
+;(set-face-attribute 'default nil :font "Atkinson Hyperlegible Mono-11.5")
 (setq-default line-spacing 0.0)
 
 (unless (package-installed-p 'nerd-icons)
@@ -153,7 +171,7 @@
 
 (unless (package-installed-p 'doom-modeline)
   (package-install 'doom-modeline))
-(doom-modeline-mode 1)
+(doom-modeline-mode 0)
 
 ;; company
 ;; Ensure 'company-mode' is installed and loaded before setting backends
@@ -302,7 +320,31 @@
                  (org-remove-inline-images)
                  (org-present-show-cursor)
                  (org-present-read-write)))))
+;;; Whitespace mode
+(defun rc/set-up-whitespace-handling ()
+  (interactive)
+  (whitespace-mode 1)
+  (add-to-list 'write-file-functions 'delete-trailing-whitespace))
 
+(add-hook 'tuareg-mode-hook 'rc/set-up-whitespace-handling)
+(add-hook 'c++-mode-hook 'rc/set-up-whitespace-handling)
+(add-hook 'c-mode-hook 'rc/set-up-whitespace-handling)
+(add-hook 'simpc-mode-hook 'rc/set-up-whitespace-handling)
+(add-hook 'emacs-lisp-mode 'rc/set-up-whitespace-handling)
+(add-hook 'java-mode-hook 'rc/set-up-whitespace-handling)
+(add-hook 'lua-mode-hook 'rc/set-up-whitespace-handling)
+(add-hook 'rust-mode-hook 'rc/set-up-whitespace-handling)
+(add-hook 'scala-mode-hook 'rc/set-up-whitespace-handling)
+(add-hook 'markdown-mode-hook 'rc/set-up-whitespace-handling)
+(add-hook 'haskell-mode-hook 'rc/set-up-whitespace-handling)
+(add-hook 'python-mode-hook 'rc/set-up-whitespace-handling)
+(add-hook 'erlang-mode-hook 'rc/set-up-whitespace-handling)
+(add-hook 'asm-mode-hook 'rc/set-up-whitespace-handling)
+(add-hook 'fasm-mode-hook 'rc/set-up-whitespace-handling)
+(add-hook 'go-mode-hook 'rc/set-up-whitespace-handling)
+(add-hook 'nim-mode-hook 'rc/set-up-whitespace-handling)
+(add-hook 'yaml-mode-hook 'rc/set-up-whitespace-handling)
+(add-hook 'porth-mode-hook 'rc/set-up-whitespace-handling)
 
 ;; pdf
 
@@ -326,4 +368,5 @@
 
 ;; other stuff
 (evil-set-undo-system 'undo-redo)
+
 

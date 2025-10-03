@@ -64,6 +64,13 @@
   (completions-common-part                   (:foreground w-viridian))
   (completions-first-difference              (:foreground w-red))
 
+  ;; Whitespace faces
+  (whitespace-space       (:foreground w-ll-gray :background nil))
+  (whitespace-tab         (:foreground w-ll-gray :background nil))
+  (whitespace-newline     (:foreground w-ll-gray :background nil))
+  (whitespace-trailing    (:foreground w-ll-gray :background nil))
+  (whitespace-line        (:background w-white))
+
 
   ;; Programmation mode
   (font-lock-comment-face                    (:foreground w-l-gray))
