@@ -35,7 +35,18 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("8df271b95462b5441d2bf6bf7e788e5875d8881c6e3ecd4a72451f4723c7ce4c"
+   '("65d5969f0afadd7206fb6779cb5cf21e5f9e4ebe61134a06760b3ced43b7ba95"
+     "e47571d17335b93122c72ac4db777c58348a260e8570b7555374a30850a1fca8"
+     "174766e006cbc0e86d31cb0c116792eddde662d33d07dbda6fca598f40d4d255"
+     "41e67e328df70cff0ebcb4dbbc9a1c4b3ac53899d8d07e999ced8e9efc5e287f"
+     "6babfa7d465f30f92166c04f96cdd7e072f95b585ec230953837a7ccda74c4c6"
+     "7720befa71d22e889e11bba41c5c70b80855ca4fc642416eacce2fa1d7e2a6c0"
+     "3c46caff5bc41037d0bfc2a2dc3b11702a758f032ff553a82c05a80207c167e4"
+     "2129f6ea95403c2be3891ec67b3f04b22f8e118377990f7cb0887b1f815cbd02"
+     "05d62876b59fe741e58576fb9f6bc07ae3b0b711953fa22c8c68a794160d3dcf"
+     "a289f4725f4d757518191b53fc8c3fb3724bd429e111d201503441b121d29c3c"
+     "3192af04b64056405acc948efc52d82535673fad69de7024e709a4ffff54e8f2"
+     "8df271b95462b5441d2bf6bf7e788e5875d8881c6e3ecd4a72451f4723c7ce4c"
      "299c5ff73c3e0fb6d08ae3b337578e9e3725fa2b087bc1ab116489f0818134f7"
      "e17487045d287a2619f08c4d923a26fb07be2df58eedbef973789480c080345b"
      "f7255b9830f66c322da648fa3fe6e697ca69c8b8b54c72a4cfc5eafe7a75a5ef"
@@ -123,12 +134,12 @@
      default))
  '(package-selected-packages
    '(auctex catppuccin-theme clang-format company-irony company-jedi
-	    corfu csv-mode doom-modeline doom-themes elpy evil
-	    exotica-theme flycheck gruber-darker-theme gruvbox-theme
-	    highlight-indent-guides ido-completing-read+ imenu-list
-	    jetbrains-darcula-theme lsp-ui magit minimal-theme
-	    nord-theme org-present pdf-tools projectile smex tao-theme
-	    vscode-dark-plus-theme vterm)))
+	    corfu csv-mode elpy evil exotica-theme flycheck
+	    gruber-darker-theme gruvbox-theme highlight-indent-guides
+	    ido-completing-read+ imenu-list jetbrains-darcula-theme
+	    lsp-ui magit minimal-theme nord-theme org-present
+	    pdf-tools projectile smex tao-theme vscode-dark-plus-theme
+	    vterm)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -168,10 +179,6 @@
 
 (unless (package-installed-p 'nerd-icons)
   (package-install 'nerd-icons))
-
-(unless (package-installed-p 'doom-modeline)
-  (package-install 'doom-modeline))
-(doom-modeline-mode 0)
 
 ;; company
 ;; Ensure 'company-mode' is installed and loaded before setting backends
