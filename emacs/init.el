@@ -173,6 +173,7 @@
 ;(load-theme 'black t)
 
 (set-face-attribute 'default nil :font "Iosevka-12")
+(setq default-frame-alist '((font . "Iosevka-12")))
 ;(set-face-attribute 'default nil :font "Jetbrains Mono-11")
 ;(set-face-attribute 'default nil :font "Atkinson Hyperlegible Mono-11.5")
 (setq-default line-spacing 0.0)
