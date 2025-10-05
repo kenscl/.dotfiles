@@ -11,3 +11,11 @@ sudo pacman -Sy i3-wm i3-status ripgrep tmux brightnessctl ttf-jetbrains-mono tt
 ```
 yay -S rofi-lbonn-wayland ttf-devicons
 ```
+
+## emacs autostart as systemd service
+
+``` bash
+systemctl --user daemon-reexec
+systemctl --user daemon-reload
+systemctl --user enable --now emacs.service
+```
