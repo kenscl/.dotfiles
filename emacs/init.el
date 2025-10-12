@@ -213,7 +213,7 @@
 (unless (package-installed-p 'clang-format)
   (package-refresh-contents)
   (package-install 'clang-format))
-(setq clang-format-style "llvm")
+(setq clang-format-style "Google")
 
 (use-package projectile
   :ensure t
@@ -222,6 +222,15 @@
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (define-key projectile-mode-map (kbd "C-c g") 'projectile-grep)
   )
+
+;; c-stuff
+(defun my-c-mode-hook ()
+  (c-set-style "gnu")     ; or "bsd", "java", "k&r", etc.
+  (setq c-basic-offset 4)
+  (setq indent-tabs-mode nil))
+
+(add-hook 'c-mode-hook 'my-c-mode-hook)
+
 
 ;; git stuff
 (unless (package-installed-p 'magit)
