@@ -1,6 +1,6 @@
 (setq inhibit-splash-screen t)
 (menu-bar-mode -1)
-(scroll-bar-mode -1)
+(scroll-bar-mode 0)
 (tool-bar-mode -1)
 
 (global-display-line-numbers-mode 1)
@@ -137,9 +137,9 @@
 	    corfu csv-mode elpy evil exotica-theme flycheck
 	    gruber-darker-theme gruvbox-theme highlight-indent-guides
 	    ido-completing-read+ imenu-list jetbrains-darcula-theme
-	    lsp-ui magit minimal-theme nord-theme org-present
-	    pdf-tools projectile smex tao-theme vscode-dark-plus-theme
-	    vterm)))
+	    julia-mode lsp-ui magit minimal-theme nord-theme
+	    org-present pdf-tools projectile smex tao-theme
+	    vscode-dark-plus-theme vterm)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -221,6 +221,12 @@
   (projectile-mode +1)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (define-key projectile-mode-map (kbd "C-c g") 'projectile-grep)
+  )
+
+;; julia
+
+(use-package julia-mode
+  :ensure t
   )
 
 ;; c-stuff
