@@ -2,6 +2,12 @@
 (menu-bar-mode -1)
 (scroll-bar-mode 0)
 (tool-bar-mode -1)
+(setq scroll-margin 8)
+(setq scroll-step 1
+      scroll-conservatively 101
+      scroll-up-aggressively 0.01
+      scroll-down-aggressively 0.01)
+
 
 (global-display-line-numbers-mode 1)
 (setq display-line-numbers-type 'relative)
@@ -36,7 +42,6 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    '("65f7b81f5c79600bae3ccaae470903f9e986c23a5c652cedff4519e7e1802c6f"
-     "29af2deb9dcfb371911f1973e8859dd4af211101779b7a968a2f2761273f531a"
      "65d5969f0afadd7206fb6779cb5cf21e5f9e4ebe61134a06760b3ced43b7ba95"
      "e47571d17335b93122c72ac4db777c58348a260e8570b7555374a30850a1fca8"
      "174766e006cbc0e86d31cb0c116792eddde662d33d07dbda6fca598f40d4d255"
