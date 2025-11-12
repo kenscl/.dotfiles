@@ -41,7 +41,14 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("65f7b81f5c79600bae3ccaae470903f9e986c23a5c652cedff4519e7e1802c6f"
+   '("41520ce1dbc1148eb94c2c7f628ae1b76efcad0f0e128f83657f52cbe2da4646"
+     "cb615330d1d395c9d4c58989f790a22d89b4d95f25c42aea9de07392836801b5"
+     "3e99156cbbc8c6f52c73aecbbfcd2e6cf91d637e7a97eff1aa60125a785c089c"
+     "7f4b8b4cc84ca15fe3cd0129a92c7319a349ca0f6ec9d16ef956a70029a5467f"
+     "2c6ed0467bbfd4917d8f5d2f0d9043e0734a127ea77da85e69297e5db0f570a7"
+     "8f208ce90e2a75103f30d47e1b7f71f1e69cd3b3122b085de784cff3d6a10294"
+     "3127b94ed8eec0b7835befb03f2cb0f2aa52faf6c439fda70de0dacaaccc8195"
+     "65f7b81f5c79600bae3ccaae470903f9e986c23a5c652cedff4519e7e1802c6f"
      "65d5969f0afadd7206fb6779cb5cf21e5f9e4ebe61134a06760b3ced43b7ba95"
      "e47571d17335b93122c72ac4db777c58348a260e8570b7555374a30850a1fca8"
      "174766e006cbc0e86d31cb0c116792eddde662d33d07dbda6fca598f40d4d255"
@@ -179,11 +186,14 @@
 (load-theme 'white t)
 ;(load-theme 'black t)
 
-(set-face-attribute 'default nil :font "Iosevka-12")
-(setq default-frame-alist '((font . "Iosevka-12")))
+;(set-face-attribute 'default nil :font "Iosevka-12")
+;(setq default-frame-alist '((font . "Iosevka-12")))
+
+(set-face-attribute 'default nil :font "BlexMonoNerdFont-12")
+(setq default-frame-alist '((font . "BlexMonoNerdFont-12")))
+
 ;(set-face-attribute 'default nil :font "Jetbrains Mono-11")
 ;(set-face-attribute 'default nil :font "Atkinson Hyperlegible Mono-11.5")
-(setq-default line-spacing 0.0)
 
 
 (unless (package-installed-p 'nerd-icons)

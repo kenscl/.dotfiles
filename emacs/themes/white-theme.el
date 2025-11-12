@@ -82,7 +82,7 @@
   (font-lock-variable-name-face              (:foreground w-blue))
   (font-lock-builtin-face                    (:foreground w-purple))
   (font-lock-type-face                       (:foreground w-purple))
-  (font-lock-keyword-face                    (:foreground w-purple))
+  (font-lock-keyword-face                    (:foreground w-purple :bold t))
 
   ;; Highlight line mode
   (with-eval-after-load "hl-line"
