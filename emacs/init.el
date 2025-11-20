@@ -189,8 +189,8 @@
 ;(set-face-attribute 'default nil :font "Iosevka-12")
 ;(setq default-frame-alist '((font . "Iosevka-12")))
 
-(set-face-attribute 'default nil :font "BlexMonoNerdFont-12")
-(setq default-frame-alist '((font . "BlexMonoNerdFont-12")))
+(set-face-attribute 'default nil :font "Ioskeley Mono-12")
+(setq default-frame-alist '((font . "Ioskeley Mono-12")))
 
 ;(set-face-attribute 'default nil :font "Jetbrains Mono-11")
 ;(set-face-attribute 'default nil :font "Atkinson Hyperlegible Mono-11.5")
@@ -279,6 +279,11 @@
  	
 (use-package tex
   :ensure auctex)
+(setq TeX-view-program-selection '((output-pdf "Okular"))
+      TeX-source-correlate-start-server t)
+
+(setq TeX-view-program-list
+      '(("Okular" "okular --unique %o#src:%n%b")))
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
 (setq-default TeX-master nil)
