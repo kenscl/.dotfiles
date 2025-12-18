@@ -41,7 +41,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("41520ce1dbc1148eb94c2c7f628ae1b76efcad0f0e128f83657f52cbe2da4646"
+   '("01a9797244146bbae39b18ef37e6f2ca5bebded90d9fe3a2f342a9e863aaa4fd"
+     "41520ce1dbc1148eb94c2c7f628ae1b76efcad0f0e128f83657f52cbe2da4646"
      "cb615330d1d395c9d4c58989f790a22d89b4d95f25c42aea9de07392836801b5"
      "3e99156cbbc8c6f52c73aecbbfcd2e6cf91d637e7a97eff1aa60125a785c089c"
      "7f4b8b4cc84ca15fe3cd0129a92c7319a349ca0f6ec9d16ef956a70029a5467f"
@@ -147,13 +148,13 @@
      "6454421996f0508c38215a633256e36c19a28591542fb0946cfc40f1dceb89cf"
      default))
  '(package-selected-packages
-   '(auctex catppuccin-theme clang-format company-irony company-jedi
-	    corfu csv-mode elpy evil exotica-theme flycheck
-	    gruber-darker-theme gruvbox-theme highlight-indent-guides
-	    ido-completing-read+ imenu-list jetbrains-darcula-theme
-	    julia-mode lsp-ui magit minimal-theme nord-theme
-	    org-present pdf-tools projectile smex tao-theme
-	    vscode-dark-plus-theme vterm)))
+   '(auctex catppuccin catppuccin-theme clang-format company-irony
+	    company-jedi corfu csv-mode elpy evil exotica-theme
+	    flycheck gruber-darker-theme gruvbox-theme
+	    highlight-indent-guides ido-completing-read+ imenu-list
+	    jetbrains-darcula-theme julia-mode lsp-ui magit
+	    minimal-theme nord-theme org-present pdf-tools projectile
+	    smex tao-theme vscode-dark-plus-theme vterm)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -182,15 +183,21 @@
 (use-package autothemer
   :ensure t)
 
+(use-package catppuccin-theme
+  :ensure t)
+
 (add-to-list 'custom-theme-load-path "~/.config/emacs/themes")
 (load-theme 'white t)
 ;(load-theme 'black t)
 
-;(set-face-attribute 'default nil :font "Iosevka-12")
-;(setq default-frame-alist '((font . "Iosevka-12")))
+(set-face-attribute 'default nil :font "Iosevka-13")
+(setq default-frame-alist '((font . "Iosevka-13")))
 
-(set-face-attribute 'default nil :font "Ioskeley Mono-12")
-(setq default-frame-alist '((font . "Ioskeley Mono-12")))
+;(set-face-attribute 'default nil :font "Ioskeley Mono-12")
+;(setq default-frame-alist '((font . "Ioskeley Mono-12")))
+
+;(set-face-attribute 'default nil :font "comic mono-13")
+;(setq default-frame-alist '((font . "comic mono-13")))
 
 ;(set-face-attribute 'default nil :font "Jetbrains Mono-11")
 ;(set-face-attribute 'default nil :font "Atkinson Hyperlegible Mono-11.5")
