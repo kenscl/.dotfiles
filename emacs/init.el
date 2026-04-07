@@ -41,7 +41,16 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("01a9797244146bbae39b18ef37e6f2ca5bebded90d9fe3a2f342a9e863aaa4fd"
+   '("2721b06afaf1769ef63f942bf3e977f208f517b187f2526f0e57c1bd4a000350"
+     "da75eceab6bea9298e04ce5b4b07349f8c02da305734f7c0c8c6af7b5eaa9738"
+     "972f792651d32b0506481b9e87b2fbc9b732ae9da2527562668c6e7d149fefda"
+     "5a0ddbd75929d24f5ef34944d78789c6c3421aa943c15218bac791c199fc897d"
+     "8363207a952efb78e917230f5a4d3326b2916c63237c1f61d7e5fe07def8d378"
+     "9013233028d9798f901e5e8efb31841c24c12444d3b6e92580080505d56fd392"
+     "10e5d4cc0f67ed5cafac0f4252093d2119ee8b8cb449e7053273453c1a1eb7cc"
+     "ffafb0e9f63935183713b204c11d22225008559fa62133a69848835f4f4a758c"
+     "ba4f725d8e906551cfab8c5f67e71339f60fac11a8815f51051ddb8409ea6e5c"
+     "01a9797244146bbae39b18ef37e6f2ca5bebded90d9fe3a2f342a9e863aaa4fd"
      "41520ce1dbc1148eb94c2c7f628ae1b76efcad0f0e128f83657f52cbe2da4646"
      "cb615330d1d395c9d4c58989f790a22d89b4d95f25c42aea9de07392836801b5"
      "3e99156cbbc8c6f52c73aecbbfcd2e6cf91d637e7a97eff1aa60125a785c089c"
@@ -153,8 +162,9 @@
 	    flycheck gruber-darker-theme gruvbox-theme
 	    highlight-indent-guides ido-completing-read+ imenu-list
 	    jetbrains-darcula-theme julia-mode lsp-ui magit
-	    minimal-theme nord-theme org-present pdf-tools projectile
-	    smex tao-theme vscode-dark-plus-theme vterm)))
+	    material-theme minimal-theme nord-theme org-present
+	    pdf-tools projectile smex tao-theme vscode-dark-plus-theme
+	    vterm zenburn-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -183,12 +193,15 @@
 (use-package autothemer
   :ensure t)
 
-(use-package catppuccin-theme
+(use-package zenburn-theme
   :ensure t)
 
+
 (add-to-list 'custom-theme-load-path "~/.config/emacs/themes")
-(load-theme 'white t)
+;(load-theme 'white t)
 ;(load-theme 'black t)
+
+(load-theme 'zenburn t)
 
 (set-face-attribute 'default nil :font "Iosevka-13")
 (setq default-frame-alist '((font . "Iosevka-13")))
@@ -238,7 +251,7 @@
 (unless (package-installed-p 'clang-format)
   (package-refresh-contents)
   (package-install 'clang-format))
-(setq clang-format-style "Google")
+(setq clang-format-style "Microsoft")
 
 (use-package projectile
   :ensure t
@@ -376,7 +389,7 @@
 ;;; Whitespace mode
 (defun rc/set-up-whitespace-handling ()
   (interactive)
-  (whitespace-mode 1)
+  (whitespace-mode 0)
   (add-to-list 'write-file-functions 'delete-trailing-whitespace))
 
 (add-hook 'tuareg-mode-hook 'rc/set-up-whitespace-handling)

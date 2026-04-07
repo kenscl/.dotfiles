@@ -22,6 +22,7 @@ font pango:Iosevka 10
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex --autostart --environment i3
+exec xrandr --output HDMI-1 --auto --left-of DP-3
 
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
@@ -36,9 +37,9 @@ exec --no-startup-id nm-applet
 
 # autostart without gui
 exec --no-startup-id setxkbmap -layout de 
-exec --no-startup-id feh --bg-fill /home/ken/.config/wallpaper/kiwi.jpg
 exec --no-startup-id flameshot 
 exec --no-startup-id systemctl --user restart emacs
+exec --no-startup-id feh --bg-fill /home/ken/.config/wallpaper/2-13-4x_BSRGAN.png
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -174,6 +175,7 @@ bindsym $mod+r mode "resize"
 bindsym $mod+e exec --no-startup-id emacsclient -c 
 bindsym $mod+i exec --no-startup-id flameshot gui 
 
+exec --no-startup-id feh --bg-fill /home/ken/.config/wallpaper/2-13-4x_BSRGAN.png
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
