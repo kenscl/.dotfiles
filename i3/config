@@ -39,7 +39,7 @@ exec --no-startup-id nm-applet
 exec --no-startup-id setxkbmap -layout de 
 exec --no-startup-id flameshot 
 exec --no-startup-id systemctl --user restart emacs
-exec --no-startup-id feh --bg-fill /home/ken/.config/wallpaper/2-13-4x_BSRGAN.png
+exec --no-startup-id feh --bg-fill /home/ken/.config/wallpaper/Moon.jpg
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -175,7 +175,7 @@ bindsym $mod+r mode "resize"
 bindsym $mod+e exec --no-startup-id emacsclient -c 
 bindsym $mod+i exec --no-startup-id flameshot gui 
 
-exec --no-startup-id feh --bg-fill /home/ken/.config/wallpaper/2-13-4x_BSRGAN.png
+exec --no-startup-id feh --bg-fill /home/ken/.config/wallpaper/Moon.jpg
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
