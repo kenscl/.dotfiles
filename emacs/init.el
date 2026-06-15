@@ -1,15 +1,18 @@
-; init stuff 
 (setq inhibit-splash-screen t)
 (menu-bar-mode -1)
 (scroll-bar-mode 0)
 (tool-bar-mode -1)
+
 (setq scroll-margin 8)
 (setq scroll-step 1
       scroll-conservatively 101
       scroll-up-aggressively 0.01
       scroll-down-aggressively 0.01)
+
+
 (global-display-line-numbers-mode 1)
 (setq display-line-numbers-type 'relative)
+(global-set-key (kbd "C-c c") 'compile)
 
 
 ;; Set up package.el to work with MELPA
@@ -20,26 +23,19 @@
 ;; this line is only needed if I want to update/install plugins :), use M-x package-refresh-contents instead
 ;;(package-refresh-contents)
 
-;; evil
-(use-package evil
-  :ensure t
-  :config
-  (evil-mode 1)
-  (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
-  (define-key evil-visual-state-map (kbd "C-u") 'evil-scroll-up)
-  (define-key evil-insert-state-map (kbd "C-u")
-  (setq evil-want-keybinding nil)
+;; Download Evil
+(unless (package-installed-p 'evil)
+  (package-install 'evil))
+
+;; Enable Evil
+(require 'evil)
+(evil-mode 1)
+(define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
+(define-key evil-visual-state-map (kbd "C-u") 'evil-scroll-up)
+(define-key evil-insert-state-map (kbd "C-u")
   (lambda ()
     (interactive)
     (evil-delete (point-at-bol) (point))))
-  )
-
-(use-package evil-collection
-  :ensure t
-  :config
-  (when (require 'evil-collection nil t)
-    (evil-collection-init))
-  )
 
 ;; spell checking
 (setq ispell-program-name "aspell") 
@@ -59,36 +55,73 @@
 (global-set-key (kbd "C-c e") 'enable-english-spell-check)
 (global-set-key (kbd "C-c d") 'enable-german-spell-check)
 
-; theme 
 (use-package zenburn-theme
-  :ensure t)
+  :ensure t
+  :config
+  (load-theme 'zenburn t))
 
-(load-theme 'zenburn t)
-
-; font
 (set-face-attribute 'default nil :font "Iosevka-13")
 (setq default-frame-alist '((font . "Iosevka-13")))
 
 (unless (package-installed-p 'nerd-icons)
   (package-install 'nerd-icons))
 
-; language stuff
+;; company
+;; Ensure 'company-mode' is installed and loaded before setting backends
+(use-package lsp-mode
+  :ensure t
+  :hook ((c-mode c++-mode) . lsp)
+  :commands lsp)
 
-;; eglot
-(use-package eglot
-  :hook ((c-mode . eglot-ensure)
-         (c++-mode . eglot-ensure)))
+(use-package lsp-ui
+  :ensure t
+  :commands lsp-ui-mode)
 
-;; c/c++
-(setq c-basic-offset 4)
-(setq c-default-style '((java-mode . "java")
-                        (awk-mode . "awk")
-                        (other . "linux")))
+(unless (package-installed-p 'company)
+  (package-refresh-contents)
+  (package-install 'company))
 
-;; cmake
-(use-package cmake-mode)
-(add-to-list 'auto-mode-alist '("CMakeLists\\.txt\\'" . cmake-mode))
-(add-to-list 'auto-mode-alist '("\\.cmake\\'" . cmake-mode))
+;; Enable company-mode globally
+(add-hook 'after-init-hook 'global-company-mode)
+
+;; Ensure company is loaded before modifying company-backends
+(with-eval-after-load 'company
+  (setq company-idle-delay 0.01)          
+  (setq company-minimum-prefix-length 1)
+  (setq company-show-numbers t)
+  ;; Add clang backend for C/C++ modes
+  (add-to-list 'company-backends 'company-clang))
+
+(add-hook 'c-mode-hook 'company-mode)
+(add-hook 'c++-mode-hook 'company-mode)
+
+(unless (package-installed-p 'clang-format)
+  (package-refresh-contents)
+  (package-install 'clang-format))
+(setq clang-format-style "Google")
+
+(use-package projectile
+  :ensure t
+  :config
+  (projectile-mode +1)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (define-key projectile-mode-map (kbd "C-c g") 'projectile-grep)
+  )
+
+;; julia
+
+(use-package julia-mode
+  :ensure t
+  )
+
+;; c-stuff
+(defun my-c-mode-hook ()
+  (c-set-style "gnu")     ; or "bsd", "java", "k&r", etc.
+  (setq c-basic-offset 4)
+  (setq indent-tabs-mode nil))
+
+(add-hook 'c-mode-hook 'my-c-mode-hook)
+
 
 ;; git stuff
 (unless (package-installed-p 'magit)
@@ -110,6 +143,7 @@
 (setq make-backup-files nil)
 
 ;; LaTex
+ 	
 (use-package tex
   :ensure auctex)
 (setq TeX-view-program-selection '((output-pdf "Okular"))
@@ -126,16 +160,70 @@
 (eval-after-load 'tex-mode
   '(define-key LaTeX-mode-map (kbd "C-c P") 'preview-clearout))
 
+
+;; lsp stuff
 ;; ido
-(require 'ido)
+(unless (package-installed-p 'smex)
+  (package-refresh-contents)
+  (package-install 'smex))
+
+(unless (package-installed-p 'ido-completing-read+)
+  (package-refresh-contents)
+  (package-install 'ido-completing-read+))
+
+(require 'smex)
+(require 'ido-completing-read+)
+
 (ido-mode t)
-(ido-everywhere t)
-;; ido enhancements
-(use-package smex
+(ido-everywhere 1)
+(ido-ubiquitous-mode 1)
+(setq ido-enable-flex-matching t)
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+
+
+;; python
+(which-function-mode 1)
+
+(use-package elpy
+  :ensure t
+  :init
+  (elpy-enable))
+(setq elpy-rpc-python-command "python3")
+(setq elpy-rpc-verbose t)
+(setq mode-line-format
+      (list
+       '(:eval (which-function))))
+
+(use-package pyvenv
+  :ensure t)
+(require 'pyvenv)
+
+;; Optional: automatically update environment for Elpy
+(add-hook 'pyvenv-post-activate-hooks
+          (lambda ()
+            (elpy-rpc-restart)))  ;; Restart Elpy to use the venv
+
+;; terminal
+(use-package vterm
+  :ensure t)
+
+;; csv
+(use-package csv-mode 
+  :ensure t
+  :init 
+  )
+
+(use-package org-present 
+  :ensure t
+  :init 
+  )
+
+;; pdf
+(use-package pdf-tools
   :ensure t
   :config
-  (global-set-key (kbd "M-x") 'smex)
-  )
+  (pdf-tools-install))
 
 ;; imenu
 (use-package imenu-list
@@ -143,8 +231,6 @@
   :config)
 
 ; rebinds
-(global-set-key (kbd "C-c c") 'compile)
-
 ;; files
 (global-set-key (kbd "C-c a") 'ff-find-other-file)
 (global-set-key (kbd "C-c C-a ") 'ff-find-other-file-other-window)
@@ -155,24 +241,3 @@
 ;; other stuff
 (evil-set-undo-system 'undo-redo)
 
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(auctex catppuccin-theme clang-format company-irony company-jedi
-	    corfu csv-mode doom-modeline doom-themes elpy evil
-	    evil-collection exotica-theme flycheck gruber-darker-theme
-	    gruvbox-theme highlight-indent-guides ido-completing-read+
-	    imenu-list indent-guide jetbrains-darcula-theme julia-mode
-	    lsp-ui magit material-theme minimal-theme nord-theme
-	    org-present pdf-tools projectile smex tao-theme
-	    vscode-dark-plus-theme vterm zenburn-theme)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
